@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\FuncionarioController;
-use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\Api\EmpresaController;
+use App\Http\Controllers\Api\FuncionarioController;
+use App\Http\Controllers\Api\ClienteController;
 
 Route::apiResource('empresas', EmpresaController::class);
 Route::apiResource('funcionarios', FuncionarioController::class);
