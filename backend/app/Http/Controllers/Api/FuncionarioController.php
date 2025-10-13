@@ -130,6 +130,7 @@ class FuncionarioController extends Controller {
         }
 
         // Retorna o funcionário atualizado
+        $funcionario->refresh();
         return new FuncionarioResource($funcionario->load('empresas'));
     }
 

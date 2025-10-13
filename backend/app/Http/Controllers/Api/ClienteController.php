@@ -75,7 +75,7 @@ class ClienteController extends Controller {
         $cliente = Cliente::with('empresas')->find($id);
 
         if(!$cliente) {
-            return response()->json(['message' => 'cliente não encontrado'], 404);
+            return response()->json(['message' => 'Cliente não encontrado'], 404);
         }
 
         return new ClienteResource($cliente);
@@ -88,7 +88,7 @@ class ClienteController extends Controller {
         $cliente = Cliente::find($id);
 
         if(!$cliente) {
-            return response()->json(['message' => 'cliente não encontrado'], 404);
+            return response()->json(['message' => 'Cliente não encontrado'], 404);
         }
 
         // Validação dos campos atualizáveis
@@ -130,6 +130,7 @@ class ClienteController extends Controller {
         }
 
         // Retorna o cliente atualizado
+        $cliente->refresh();
         return new ClienteResource($cliente->load('empresas'));
     }
 
@@ -140,12 +141,12 @@ class ClienteController extends Controller {
         $cliente = Cliente::find($id);
 
         if(!$cliente) {
-            return response()->json(['message' => 'cliente não encontrado'], 404);
+            return response()->json(['message' => 'Cliente não encontrado'], 404);
         }
 
         $cliente->delete();
 
-        return response()->json(['message' => 'cliente excluído com sucesso']);
+        return response()->json(['message' => 'Cliente excluído com sucesso']);
     }
 
 }
