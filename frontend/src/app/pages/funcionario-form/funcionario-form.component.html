@@ -1,0 +1,29 @@
+<h2>{{ isEdit ? 'Editar Funcionário' : 'Novo Funcionário' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>Login:</label>
+  <input formControlName="login" />
+  <div *ngIf="form.get('login')?.hasError('accentNotAllowed')">Sem acentuação.</div>
+
+  <label>Nome:</label>
+  <input formControlName="nome" />
+  <div *ngIf="form.get('nome')?.hasError('accentNotAllowed')">Sem acentuação.</div>
+
+  <label>CPF:</label>
+  <input formControlName="cpf" />
+
+  <label>Email:</label>
+  <input formControlName="email" type="email" />
+
+  <label>Endereço:</label>
+  <input formControlName="endereco" />
+
+  <label>Senha:</label>
+  <input formControlName="senha" type="password" />
+
+  <label>Documento:</label>
+  <input type="file" (change)="onFileSelected($event)" accept=".pdf, image/jpeg" />
+
+  <button type="submit">{{ isEdit ? 'Salvar' : 'Cadastrar' }}</button>
+  <button type="button" routerLink="/funcionarios">Cancelar</button>
+</form>
