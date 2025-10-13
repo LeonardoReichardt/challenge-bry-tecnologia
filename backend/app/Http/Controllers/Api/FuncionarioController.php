@@ -50,9 +50,9 @@ class FuncionarioController extends Controller {
         // Criptografa a senha antes de salvar
         $data['senha'] = Hash::make($data['senha']);
 
-        // Se foi enviado um arquivo, salva em storage/app/public/documentos
+        // Se foi enviado um arquivo, salva em storage/app/public/documentos/funcionarios
         if($request->hasFile('documento')) {
-            $path = $request->file('documento')->store('documentos', 'public');
+            $path = $request->file('documento')->store('documentos/funcionarios', 'public');
             $data['documento'] = $path;
         }
 
@@ -117,7 +117,7 @@ class FuncionarioController extends Controller {
 
         // Atualiza documento se for enviado
         if($request->hasFile('documento')) {
-            $path = $request->file('documento')->store('documentos', 'public');
+            $path = $request->file('documento')->store('documentos/funcionarios', 'public');
             $data['documento'] = $path;
         }
 

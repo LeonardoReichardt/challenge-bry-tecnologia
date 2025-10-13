@@ -50,9 +50,9 @@ class ClienteController extends Controller {
         // Criptografa a senha antes de salvar
         $data['senha'] = Hash::make($data['senha']);
 
-        // Se foi enviado um arquivo, salva em storage/app/public/documentos
+        // Se foi enviado um arquivo, salva em storage/app/public/documentos/clientes
         if($request->hasFile('documento')) {
-            $path = $request->file('documento')->store('documentos', 'public');
+            $path = $request->file('documento')->store('documentos/clientes', 'public');
             $data['documento'] = $path;
         }
 
@@ -117,7 +117,7 @@ class ClienteController extends Controller {
 
         // Atualiza documento se for enviado
         if($request->hasFile('documento')) {
-            $path = $request->file('documento')->store('documentos', 'public');
+            $path = $request->file('documento')->store('documentos/clientes', 'public');
             $data['documento'] = $path;
         }
 
