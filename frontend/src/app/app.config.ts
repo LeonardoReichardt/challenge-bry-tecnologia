@@ -1,0 +1,19 @@
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    importProvidersFrom(
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(),
+      ReactiveFormsModule
+    )
+  ]
+};
