@@ -1,0 +1,12 @@
+<h2>Clientes</h2>
+<button routerLink="/clientes/novo">Novo Cliente</button>
+
+<div *ngIf="loading">Carregando...</div>
+
+<ul *ngIf="!loading">
+  <li *ngFor="let c of clientes">
+    <b>{{ c.nome }}</b> - {{ c.login }}
+    <button [routerLink]="['/clientes', c.id]">Editar</button>
+    <button (click)="delete(c.id!)">Excluir</button>
+  </li>
+</ul>
