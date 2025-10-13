@@ -1,0 +1,12 @@
+<h2>Empresas</h2>
+<button routerLink="/empresas/novo">Nova Empresa</button>
+
+<div *ngIf="loading">Carregando...</div>
+
+<ul *ngIf="!loading">
+  <li *ngFor="let empresa of empresas">
+    <b>{{ empresa.nome }}</b> ({{ empresa.cnpj }})
+    <button [routerLink]="['/empresas', empresa.id]">Editar</button>
+    <button (click)="delete(empresa.id!)">Excluir</button>
+  </li>
+</ul>
