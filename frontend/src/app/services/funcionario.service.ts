@@ -32,7 +32,17 @@ export class FuncionarioService {
   }
 
   update(id: number, data: FormData | Partial<Funcionario>): Observable<Funcionario> {
-    return this.http.put<{ data: Funcionario }>(`${this.baseUrl}/${id}`, data).pipe(
+    let body: any;
+
+    if(data instanceof FormData) {
+      data.append('_method', 'PUT');
+      body = data;
+    }
+    else {
+      body = { ...data, _method: 'PUT' };
+    }
+
+    return this.http.post<{ data: Funcionario }>(`${this.baseUrl}/${id}`, body).pipe(
       map(response => response.data)
     );
   }
