@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { EmpresaService } from '../../services/empresa.service';
 
 @Component({
   selector: 'app-empresa-form',
-  templateUrl: './empresa-form.component.html'
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  templateUrl: './empresa-form.component.html',
 })
 
 export class EmpresaFormComponent implements OnInit {

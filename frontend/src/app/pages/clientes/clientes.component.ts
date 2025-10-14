@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente.model';
 
 @Component({
   selector: 'app-clientes',
-  templateUrl: './clientes.component.html'
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './clientes.component.html',
 })
 
 export class ClientesComponent implements OnInit {

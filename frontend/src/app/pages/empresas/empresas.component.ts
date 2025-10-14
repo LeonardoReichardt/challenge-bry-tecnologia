@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from '../../models/empresa.model';
 
 @Component({
   selector: 'app-empresas',
-  templateUrl: './empresas.component.html'
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './empresas.component.html',
 })
 
 export class EmpresasComponent implements OnInit {

@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../models/funcionario.model';
 
 @Component({
   selector: 'app-funcionarios',
-  templateUrl: './funcionarios.component.html'
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './funcionarios.component.html',
 })
 
 export class FuncionariosComponent implements OnInit {
