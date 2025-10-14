@@ -1,31 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Cliente } from '../models/cliente.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ClienteService {
   private baseUrl = `${environment.apiUrl}/clientes`;
 
   constructor(private http: HttpClient) {}
 
   list(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(this.baseUrl);
+    return this.http.get<{ data: Cliente[] }>(this.baseUrl).pipe(
+      map(response => response.data)
+    );
   }
 
   get(id: number): Observable<Cliente> {
-    return this.http.get<Cliente>(`${this.baseUrl}/${id}`);
+    return this.http.get<{ data: Cliente }>(`${this.baseUrl}/${id}`).pipe(
+      map(response => response.data)
+    );
   }
 
   create(data: FormData | Partial<Cliente>): Observable<Cliente> {
-    return this.http.post<Cliente>(this.baseUrl, data);
+    return this.http.post<{ data: Cliente }>(this.baseUrl, data).pipe(
+      map(response => response.data)
+    );
   }
 
   update(id: number, data: FormData | Partial<Cliente>): Observable<Cliente> {
-    return this.http.put<Cliente>(`${this.baseUrl}/${id}`, data);
+    return this.http.put<{ data: Cliente }>(`${this.baseUrl}/${id}`, data).pipe(
+      map(response => response.data)
+    );
   }
 
   delete(id: number): Observable<void> {
