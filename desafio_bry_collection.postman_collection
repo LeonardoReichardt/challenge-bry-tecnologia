@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "ad9d1323-cb8f-4b2d-99dd-2e45219940ec",
+		"name": "Desafio Bry Collection",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49196093",
+		"_collection_link": "https://leonardoreichardt-4036945.postman.co/workspace/Leonardo-Reichardt's-Workspace~b31664c9-cff3-4979-83e4-86848004583b/collection/49196093-ad9d1323-cb8f-4b2d-99dd-2e45219940ec?action=share&source=collection_link&creator=49196093"
+	},
+	"item": [
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Listar Empresas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Body is array\", () => {\r",
+									"  const json = pm.response.json();\r",
+									"  pm.expect(Array.isArray(json)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/empresas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"empresas"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+									"const json = pm.response.json();",
+									"pm.test(\"Has id\", () => pm.expect(json.data).to.have.property('id'));",
+									"pm.environment.set(\"empresa_id\", json.data.id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Bry\",\n    \"cnpj\": \"12345678000196\",\n    \"endereco\": \"Comercial São Francisco - R. Lauro Linhares, 2010\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/empresas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"empresas"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Empresa por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"const json = pm.response.json();\r",
+									"pm.test(\"Has funcionarios and clientes arrays\", () => {\r",
+									"  pm.expect(json).to.have.property('funcionarios');\r",
+									"  pm.expect(json).to.have.property('clientes');\r",
+									"  pm.expect(Array.isArray(json.funcionarios)).to.be.true;\r",
+									"  pm.expect(Array.isArray(json.clientes)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/empresas/{{empresa_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"empresas",
+								"{{empresa_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Bry Tecnologia\",\r\n    \"cnpj\": \"12.345.678/0001-90\",\r\n    \"endereco\": \"Comercial São Francisco - R. Lauro Linhares, 2010 - Torre B, 8º andar - Trindade, Florianópolis - SC, 88036-002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/empresas/{{empresa_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"empresas",
+								"{{empresa_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Empresa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deleted (200 or 204)\", () => {\r",
+									"  pm.expect(pm.response.code === 204 || pm.response.code === 200).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/empresas/{{empresa_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"empresas",
+								"{{empresa_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Funcionários",
+			"item": [
+				{
+					"name": "Listar Funcionários",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Body is array\", () => {\r",
+									"  const json = pm.response.json();\r",
+									"  pm.expect(Array.isArray(json)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/funcionarios",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Funcionário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201\", () => pm.response.to.have.status(201));\r",
+									"const json = pm.response.json();\r",
+									"pm.environment.set(\"funcionario_id\", json.data.id);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "leonardo.reichardt",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "Leonardo Reichardt",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "12345678901",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "swe.leonardo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": "Av. Oscar Barcelos, nº 1000 - Centro",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "leo123",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "postman-cloud:///1f0a86dd-a142-43e0-8613-f6b3709e4c50"
+								},
+								{
+									"key": "empresa_ids[]",
+									"value": "{{empresa_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/funcionarios",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"funcionarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Funcionário por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"const json = pm.response.json();\r",
+									"pm.test(\"Has empresas array\", () => {\r",
+									"  pm.expect(json).to.have.property('empresas');\r",
+									"  pm.expect(Array.isArray(json.empresas)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/funcionarios/{{funcionario_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"funcionarios",
+								"{{funcionario_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Funcionário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "leonardo.reichardt",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "Leonardo Reichardt Pereira",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "12345678901",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "swe.leonardo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": "R. José Maria da Luz - Florianópolis",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "123leo",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "postman-cloud:///1f0a8702-376b-40f0-9c0c-ddcf45e61aa5"
+								},
+								{
+									"key": "empresa_ids[]",
+									"value": "{{empresa_id}}",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/funcionarios/{{funcionario_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"funcionarios",
+								"{{funcionario_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Funcionário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 204 or 200\", () => {\r",
+									"  pm.expect(pm.response.code === 204 || pm.response.code === 200).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/funcionarios/{{funcionario_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"funcionarios",
+								"{{funcionario_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Listar Clientes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"pm.test(\"Body is array\", () => {\r",
+									"  const json = pm.response.json();\r",
+									"  pm.expect(Array.isArray(json)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 201\", () => pm.response.to.have.status(201));\r",
+									"const json = pm.response.json();\r",
+									"pm.environment.set(\"cliente_id\", json.data.id);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "leonardo.reichardt",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "Leonardo Reichardt",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "12345678905",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "swe.leonardo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": "Av. Oscar Barcelos, nº 1000 - Centro",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "leo123",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "postman-cloud:///1f0a86dd-a142-43e0-8613-f6b3709e4c50"
+								},
+								{
+									"key": "empresa_ids[]",
+									"value": "{{empresa_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Cliente por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									"const json = pm.response.json();\r",
+									"pm.test(\"Has empresas array\", () => {\r",
+									"  pm.expect(json).to.have.property('empresas');\r",
+									"  pm.expect(Array.isArray(json.empresas)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/{{cliente_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"{{cliente_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "login",
+									"value": "leonardo.reichardt",
+									"type": "text"
+								},
+								{
+									"key": "nome",
+									"value": "Leonardo Reichardt Pereira",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "12345678901",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "swe.leonardo@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "endereco",
+									"value": "R. José Maria da Luz - Florianópolis",
+									"type": "text"
+								},
+								{
+									"key": "senha",
+									"value": "123leo",
+									"type": "text"
+								},
+								{
+									"key": "documento",
+									"type": "file",
+									"src": "postman-cloud:///1f0a8702-376b-40f0-9c0c-ddcf45e61aa5"
+								},
+								{
+									"key": "empresa_ids[]",
+									"value": "{{empresa_id}}",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/clientes/{{cliente_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"{{cliente_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status 204 or 200\", () => {\r",
+									"  pm.expect(pm.response.code === 204 || pm.response.code === 200).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/clientes/{{cliente_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"clientes",
+								"{{cliente_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "empresaId",
+			"value": ""
+		},
+		{
+			"key": "funcionarioId",
+			"value": ""
+		},
+		{
+			"key": "clienteId",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
