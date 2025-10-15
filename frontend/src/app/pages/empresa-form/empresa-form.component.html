@@ -1,16 +1,30 @@
-<h2>{{ isEdit ? 'Editar Empresa' : 'Nova Empresa' }}</h2>
+<div class="card">
+  <div class="card-header">
+    <h2>{{ isEdit ? "Editar Empresa" : "Nova Empresa" }}</h2>
+  </div>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>Nome:</label>
-  <input formControlName="nome" />
-  <div *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched">Nome obrigatório</div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" formControlName="nome" placeholder="Digite o nome da empresa" />
+      <small *ngIf="form.get('nome')?.hasError('accentNotAllowed')">❌ Não pode ter acentuação</small>
+    </div>
 
-  <label>CNPJ:</label>
-  <input formControlName="cnpj" />
+    <div class="form-group">
+      <label for="cnpj">CNPJ</label>
+      <input id="cnpj" formControlName="cnpj" placeholder="00.000.000/0000-00" />
+    </div>
 
-  <label>Endereço:</label>
-  <input formControlName="endereco" />
+    <div class="form-group">
+      <label for="endereco">Endereço</label>
+      <input id="endereco" formControlName="endereco" placeholder="Rua Exemplo, 123" />
+    </div>
 
-  <button type="submit">{{ isEdit ? 'Salvar' : 'Cadastrar' }}</button>
-  <button type="button" routerLink="/empresas">Cancelar</button>
-</form>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        {{ isEdit ? "Salvar" : "Cadastrar" }}
+      </button>
+      <button type="button" class="btn btn-secondary" routerLink="/empresas">Cancelar</button>
+    </div>
+  </form>
+</div>

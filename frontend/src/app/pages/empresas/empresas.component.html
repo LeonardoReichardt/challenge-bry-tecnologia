@@ -1,12 +1,28 @@
-<h2>Empresas</h2>
-<button routerLink="/empresas/novo">Nova Empresa</button>
+<div class="card">
+  <div class="card-header">
+    <h2>Empresas</h2>
+    <button routerLink="/empresas/novo" class="btn btn-primary">+ Nova Empresa</button>
+  </div>
 
-<div *ngIf="loading">Carregando...</div>
-
-<ul *ngIf="!loading">
-  <li *ngFor="let empresa of empresas">
-    <b>{{ empresa.nome }}</b> ({{ empresa.cnpj }})
-    <button [routerLink]="['/empresas', empresa.id]">Editar</button>
-    <button (click)="delete(empresa.id!)">Excluir</button>
-  </li>
-</ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Endereço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empresa of empresas">
+        <td>{{ empresa.nome }}</td>
+        <td>{{ empresa.cnpj }}</td>
+        <td>{{ empresa.endereco }}</td>
+        <td>
+          <button [routerLink]="['/empresas', empresa.id]" class="btn btn-edit">Editar</button>
+          <button (click)="delete(empresa.id!)" class="btn btn-danger">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

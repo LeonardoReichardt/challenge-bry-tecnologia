@@ -1,1 +1,135 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+.navbar {
+  background: #3f51b5;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 1.4rem;
+}
+
+.navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-weight: 500;
+}
+
+.navbar nav a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  margin-bottom: 1rem;
+  color: #3f51b5;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: .4rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: .7rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color .2s;
+}
+
+.form-group input:focus {
+  border-color: #3f51b5;
+  outline: none;
+}
+
+.btn {
+  background: #3f51b5;
+  color: white;
+  padding: .7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background .2s;
+  margin-right: 4px;
+}
+
+.btn:hover {
+  background: #2c3a91;
+}
+
+.btn.small {
+  padding: .4rem .8rem;
+  font-size: 0.9rem;
+}
+
+.btn.edit {
+  background: #4caf50;
+}
+
+.btn.edit:hover {
+  background: #3b8e40;
+}
+
+.btn.delete {
+  background: #f44336;
+}
+
+.btn.delete:hover {
+  background: #c62828;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+thead {
+  background: #e0e0e0;
+}
+
+th, td {
+  padding: .8rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}

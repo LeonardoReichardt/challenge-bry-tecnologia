@@ -1,12 +1,28 @@
-<h2>Funcionários</h2>
-<button routerLink="/funcionarios/novo">Novo Funcionário</button>
+<div class="card">
+  <div class="card-header">
+    <h2>Funcionários</h2>
+    <button routerLink="/funcionarios/novo" class="btn btn-primary">+ Novo Funcionário</button>
+  </div>
 
-<div *ngIf="loading">Carregando...</div>
-
-<ul *ngIf="!loading">
-  <li *ngFor="let f of funcionarios">
-    <b>{{ f.nome }}</b> - {{ f.login }}
-    <button [routerLink]="['/funcionarios', f.id]">Editar</button>
-    <button (click)="delete(f.id!)">Excluir</button>
-  </li>
-</ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Login</th>
+        <th>Endereço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let funcionario of funcionarios">
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.login }}</td>
+        <td>{{ funcionario.endereco }}</td>
+        <td>
+          <button [routerLink]="['/funcionarios', funcionario.id]" class="btn btn-edit">Editar</button>
+          <button (click)="delete(funcionario.id!)" class="btn btn-danger">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

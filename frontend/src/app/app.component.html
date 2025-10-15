@@ -1,9 +1,31 @@
-<nav>
-  <a routerLink="/empresas" routerLinkActive="active">Empresas</a> |
-  <a routerLink="/funcionarios" routerLinkActive="active">Funcionários</a> |
-  <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Desafio Bry</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <h1>Desafio Bry</h1>
+      </div>
+      <ul>
+        <li>
+          <a routerLink="/empresas" routerLinkActive="active">Empresas</a>
+        </li>
+        <li>
+          <a routerLink="/funcionarios" routerLinkActive="active">Funcionários</a>
+        </li>
+        <li>
+          <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
+        </li>
+      </ul>
+    </nav>
 
-<hr>
-
-<router-outlet></router-outlet>
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
+  </body>
+</html>
